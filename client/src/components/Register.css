@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-form-box {
+    width: 20rem;
+    height: 22rem;
+    background-color: #fbccae;
+    display: flex;
+    justify-content: center;
+}
+
+.register-topic {
+    /* border: 1px solid red; */
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    /* background-color: #373 737; */
+}
+
+.text-form {
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+    /* border: 1px solid rgb(255, 168, 168); */
+    margin-top: 5px;
+    gap: 10px;
+}
+
+input[type="text"], input[type="password"] {
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+.register-button {
+    margin-top: 2rem;
+    width: calc(100% - 10px);
+    height: 2.5rem;
+    border-radius: 10px;
+    border: 2px solid white;
+    /* background-color: #e368b2; */
+}
+.register-button:hover {
+    background-color: #e368b2CC;
+}
