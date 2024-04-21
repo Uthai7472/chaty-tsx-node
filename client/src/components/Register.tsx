@@ -2,9 +2,11 @@ import React, { ChangeEvent, useState } from 'react';
 // import '../index.css';
 import './Register.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         id: '',
@@ -28,6 +30,8 @@ const Register = () => {
         try {
             const response = await axios.post('http://localhost:3002/api/register', formData);
             console.log("Response Data from /api/register: ", response.data);
+            navigate('/');
+
         } catch (error) {
             console.error(error);
             alert(error);

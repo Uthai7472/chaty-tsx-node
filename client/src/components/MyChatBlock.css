@@ -1,0 +1,34 @@
+
+
+.chat-container {
+    /* position: relative; */
+    /* right: 0; */
+    width: auto;
+    padding: 5px;
+    margin: 10px;
+    border: 1px solid black
+
+}
+
+.message-container {
+    /* position: absolute; */
+    transform: translateX(90vw);
+    width: 100px;
+    background-color: #D94A94;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+/*---------------------------------------------------------*/
+
+.your-message-container {
+    /* position: absolute; */
+    left: 0;
+    width: 100px;
+    background-color: #FBCCAE;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+

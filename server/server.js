@@ -61,6 +61,32 @@ app.get('/', async (req, res) => {
             }
         });
 
+        await connection.query(`
+            CREATE TABLE IF NOT EXISTS tb_chats (
+                id_table INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(30),
+                message TEXT,
+                image_url TEXT,
+                timestamp TIME,
+                date DATE
+            )
+        `, (err, results) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Create tb_chats completed');
+            }
+        });
+        // await connection.query(`
+        //     DROP TABLE tb_chats
+        // `, (err, results) => {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         console.log('Drop tb_chats completed');
+        //     }
+        // });
+
     } catch (error) {
         console.error("Error : ", error);
         res.status(500);
@@ -168,4 +194,65 @@ app.post('/users/login', async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'An error occurred during user login' });
     }
-})
+});
+
+//------------------------------CHAT API---------------------------
+app.post('/api/chat/send', async (req, res) => {
+    try {
+        const username = req.body.username;
+        const message = req.body.message;
+        const image_url = req.body.image_url;
+        const timestamp = new Date(req.body.timestamp);
+        // Parse the date string to extract day, month, and year
+        const dateParts = req.body.date.split('/');
+        const year = dateParts[2];
+        const month = dateParts[0];
+        const day = dateParts[1];
+
+        // Format the date string as 'YYYY-MM-DD'
+        const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+        console.log('formatted Date ', formattedDate);
+
+
+        try {
+            await connection.query(`
+                INSERT INTO tb_chats (username, message, image_url, timestamp, date)
+                VALUES (?, ?, ?, ?, ?)
+            `, [username, message, image_url, timestamp, formattedDate], (err, results) => {
+                if (err) {
+                    console.log(err);
+                    res.send('Error Insert Chats');
+                } else {
+                    res.status(200).json({ message: 'Send message successful' });
+                }
+            });
+
+            console.log("Username: ", username);
+        } catch (error) {
+            console.log(error);
+            console.error(error);
+            res.status(500).json({ error: 'An error occur during send message' });
+        }
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred during send message' });
+    }
+});
+
+app.get('/api/chat/show_message', async (req, res) => {
+    try {
+        await connection.query(`
+            SELECT * FROM tb_chats
+        `, (err, results) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(results);
+            }
+        })
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+    }
+});

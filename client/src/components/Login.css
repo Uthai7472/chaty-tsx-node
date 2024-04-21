@@ -1,9 +1,11 @@
 body {
     margin: 0;
+    background-color: #fff;
 }
 
 * {
     box-sizing: border-box;
+    
 }
 
 .body {
@@ -12,14 +14,28 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url('../public/picture/candy1.jpg'); /* Use url() to specify the path to the image */
+    background-size: cover; /* Ensure the background image covers the entire element */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat;
 }
 
 .login-form-box {
     width: 20rem;
     height: 20rem;
-    background-color: #faa7d2;
+    /* background: #faa7d2; */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     display: flex;
     justify-content: center;
+    border: 1px solid #373737;
+    /* filter: blur(1px); */
+    /* backdrop-filter: blur(30px); */
+    /* z-index: 99; */
 }
 
 .text-form {
@@ -46,4 +62,11 @@ input[type="text"], input[type="password"] {
 }
 .login-button:hover {
     background-color: #fbccaeCB;
+}
+
+.login-topic {
+    color: white;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
 }

@@ -1,26 +1,34 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import './Main.css'
+import Navbar from './Navbar';
+import Header from './Header';
+import AuthGuard from './AuthGuard';
+import useAuth from './AuthGuard';
+import ChatBar from './ChatBar';
+import MyChatBlock from './MyChatBlock';
+import YourChatBlock from './YourChatBlock';
 
-const Main = ({ isAuthenticated }) => {
+const Main = () => {
 
-  const navigate = useNavigate();
+  const isAuthen = useAuth();
 
-  const handleLogout = () => {
-    navigate('/');
+  if (!isAuthen) {
+    return null;
   }
 
+  let userLogin = localStorage.getItem('userLogin');
+  console.log(localStorage.getItem('userLogin'));
+
   return (
-    <div>
-        { !isAuthenticated ? (
-          <h1>Failed</h1>
-        ) : (
-          <div>
-            <h1>Main Page</h1>
-            <Link to={'/about'}>go to About page</Link>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        )}
-        
+    <div className='main-body'>
+      <Header topic={userLogin} />
+      {/* <Navbar /> */}
+
+      {/* <YourChatBlock /> */}
+      <MyChatBlock />
+
+      <ChatBar />
     </div>
   )
 }

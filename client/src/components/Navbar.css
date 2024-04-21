@@ -1,0 +1,10 @@
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 2rem 0 0 1rem;
+    color: red;
+    background-color: antiquewhite;
+    height: 100vh;
+    width: 20vw;
+}

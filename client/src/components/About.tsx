@@ -1,16 +1,20 @@
-import React from 'react'
+import React from 'react';
+import Header from './Header';
+import Navbar from './Navbar';
+import useAuth from './AuthGuard';
 
-const About = ({isAuthenticated}) => {
+const About = () => {
+
+  const isAuthen = useAuth();
+
+  if (!isAuthen) {
+    return null;
+  }
+
   return (
     <div>
-        { !isAuthenticated ? (
-            <h1>Failed</h1>
-        ) : (
-            <div>
-                <h1>About Page</h1>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium, modi soluta!</p>
-            </div>
-        )}
+      <Header topic={'About'} />
+      <Navbar />
     </div>
   )
 }

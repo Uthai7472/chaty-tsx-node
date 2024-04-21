@@ -1,17 +1,15 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import '../index.css';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = () => {
 
     const [loginData, setLoginData] = useState({
         username: '',
         password: '',
     });
-    // const [isAuthenticated, setIsAuthenticated] = useState(false);
-    // const [isClear, setIsClear] = useState(false);
+
     const navigate = useNavigate();
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +32,9 @@ const Login = ({ setIsAuthenticated }) => {
             console.log('Response Data: ', response.data);
             
             if (response.data.authenticated === 'true') {
-                setIsAuthenticated(true);
+                // Store authentication state in localStorage
+                localStorage.setItem('isAuthenticated', 'true');
+                localStorage.setItem('userLogin', loginData.username);
                 navigate('/main');
             }
 
@@ -50,8 +50,8 @@ const Login = ({ setIsAuthenticated }) => {
     <div className='body'>
             <div className='login-form-box rounded-2xl'>
                 <div className='form'>
-                    <div className='register-topic'>
-                        <h1>Login</h1>
+                    <div className='login-topic'>
+                        <h1>OuMilin Family Login</h1>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className='text-form'>
